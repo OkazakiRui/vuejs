@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Vue.js</title>
+  </head>
+  <body>
+    <script src="vue.js"></script>
+    <h1>Vue.js 勉強</h1>
+
+    <div id="app1">
+      <p>{{message}}</p>
+      <p>{{name}}</p>
+      <button @click="name = 'ボタンから変更'">変更</button>
+    </div>
+    <div id="app2">
+      <p>{{message}}</p>
+      <button @click="changeMessage">インスタンス1のメッセージを変更</button>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Vue.js</title>
+  </head>
+  <body>
+    <script src="vue.js"></script>
+    <h1>Vue.js 勉強</h1>
+
+    <div id="app">
+      <p>{{message1}}</p>
+      <button v-on:click="reverseMessage">メッセージ反転</button>
+      <p>{{number * 3}}</p>
+      <p>{{ok ? "yes" : "no"}}</p>
+      <p>{{hello()}}</p>
+      <h2>ディレクティブ</h2>
+      <p v-text="message2"></p>
+      <p v-once>{{message2}}</p>
+      <p>{{html1}}</p>
+      <p v-html="html1"></p>
+      <p><a v-bind:href="url1" target="google">Google</a></p>
+      <p><a :href="url1" target="google">Google</a></p>
+      <p><a :[attribute1]="url1" target="google">Google</a></p>
+      <p><a v-bind="{href: url2,id:number}" target="twitter">Twitter</a></p>
+      <p><a v-bind="yahooObject" target="yahoo">Yahoo!JP</a></p>
+      <p>現在{{clickCount}}回クリックされています。</p>
+      <button v-on:click="clickCount++">カウントアップ</button>
+      <button v-on:click="countDown">カウントダウン</button>
+      <p v-on:mousemove="changeMousePosition">マウスを乗せてください</p>
+      <p>X:{{MousePositionX}}, Y:{{MousePositionY}}</p>
+      <p v-on:copy="copyText($event, 'red')">この文章をコピーしてください</p>
+      <p :style="copyTextColor">岡崎流依</p>
+      <p v-on:mousemove="changeMousePosition">
+        マウスを乗せてください<br />
+        <span v-on:mousemove="stopMousePosition">この上は反応しません。</span
+        ><br />
+        <span v-on:mousemove.stop>この上は反応しません。</span>
+      </p>
+      <p>X:{{MousePositionX}}, Y:{{MousePositionY}}</p>
+      <p>
+        <a v-on:click="stopSiteMove" href="https://www.google.com/">Google</a>
+        <a v-on:click.prevent href="https://www.google.com/">Google</a>
+      </p>
+
+      <p v-on:mousemove="changeMousePosition">
+        マウスを乗せてください
+        <a v-on:click.prevent v-on:mousemove.stop href="https://www.google.com/"
+          >Google</a
+        >
+      </p>
+      <p>X:{{MousePositionX}}, Y:{{MousePositionY}}</p>
+      <input
+        type="text"
+        v-on:keyup.enter.space="myAlert"
+        placeholder="Enter or Space"
+      /><br />
+      <button v-on:[buttonclick]="myAlert">アラート表示</button><br />
+      <button @click="myAlert">アラート表示</button>
+      <p>こんにちは、{{HelloName}}さん！</p>
+      <input type="text" v-model="HelloName" />
+      <p v-text="clickCount"></p>
+      <button @click="clickCount++">+1</button>
+      <p>{{lessThanThreeComputed}}</p>
+      <p>{{lessThanThreeMethods()}}</p>
+      <button @click="countDown">-1</button>
+      <button @click="countDown()">-1</button>
+      <button @click="clickCount--">-1</button>
+      <p :class="{red:!isActive, 'bg-blue':isActive}">Hello</p>
+      <p :class="classObject">Hello</p>
+      <p :class="[color,bg]">Hello</p>
+      <p :class="[color,{'bg-blue':isActive}]">Hello</p>
+      <button @click="isActive = !isActive">切り替え</button>
+      <p :style="{color: textColor, 'background-color': bgColor }">Hello</p>
+      <p :style="textStyleObject">Hello</p>
+      <p :style="[baseStyleObject,textStyleObject]">Hello</p>
+      <p v-if="okData">OK!</p>
+      <p v-else-if="maybeOkData">Maybe OK!</p>
+      <p v-else>Not OK...</p>
+      <p>OK : {{okData}}<br />MaybeOK : {{maybeOkData}}</p>
+      <button @click="okData = !okData">OK togle</button>
+      <button @click="maybeOkData = !maybeOkData">Maybe OK togle</button>
+      <p>
+        <template v-if="tempDOM">
+          <p>はじめまして、</p>
+          <p>岡崎流依です。</p>
+          <p>よろしくお願いします。</p>
+        </template>
+        <button @click="tempDOM = !tempDOM" v-if="tempDOM">tempDOM 非表示</button>
+        <button @click="tempDOM = !tempDOM" v-else>tempDOM 表示</button>
+      </p>
+      <p>
+        <p v-show="showDOM">はじめまして、松尾です。</p>
+        <div v-show="showDOM">
+          <p>hope</p>
+          <p>ミスター・ブルースカイ</p>
+          <p>生きるをする</p>
+        </div>
+        <button @click="showDOM = !showDOM" v-if="showDOM">showDOM 非表示</button>
+        <button @click="showDOM = !showDOM" v-else>showDOM 表示</button>
+      </p>
+      <ul>
+        <li v-for="fruit in fruits">{{fruit}}</li>
+      </ul>
+      <ul>
+        <li v-for="fruit,index in fruits">[{{index}}]{{fruit}}</li>
+      </ul>
+      <ul>
+        <li v-for="(value,key,index) in userObject">[{{index}}]{{key}} : {{value}}</li>
+      </ul>
+      <ul>
+        <template v-for="fruit in fruits">
+          <li>{{fruit}}</li>
+          <hr>
+        </template>
+      </ul>
+      <ul>
+        <li v-for="n in 3">{{n}}</li>
+        <li v-for="n of 3">{{n}}</li>
+      </ul>
+      <ul>
+        <div v-for="fruit in fruits">
+          <p>{{fruit}}</p>
+          <input type="text">
+        </div>
+        <hr>
+        <div v-for="fruit in fruits" :key="fruit">
+          <p>{{fruit}}</p>
+          <input type="text">
+        </div>
+      </ul>
+
+      <button @click="fruitsRemove">先頭を削除する</button>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
